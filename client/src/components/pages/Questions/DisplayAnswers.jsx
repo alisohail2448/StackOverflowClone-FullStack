@@ -1,9 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import moment from "moment";
 import Avatar from "../../Avatar/Avatar";
-import "./Questions.css"
+import { useDispatch, useSelector } from "react-redux";
+import "./Questions.css";
+import { deleteAnswers } from "../../../actions/questionAction";
 
-const DisplayAnswers = ({ question }) => {
+const DisplayAnswers = ({ question, handleShare }) => {
+  // console.log(question);
+  const dispatch = useDispatch();
+  const User = useSelector((state) => state.currentUserReducer);
+  const {id} = useParams();
+
+  const handleDelete = (answerId, noOfAnswers) =>{
+      dispatch(deleteAnswers(id, answerId, noOfAnswers - 1));
+  }
+
   return (
     <div>
       {question.answer.map((ans) => {
@@ -12,13 +24,19 @@ const DisplayAnswers = ({ question }) => {
             <p>{ans.answerBody}</p>
             <div className="question-actions-user">
               <div>
-                <button type="button">Share</button>
-                <button type="button">Delete</button>
+                <button type="button" onClick={handleShare}>
+                  Share
+                </button>
+                {User?.result?._id === ans?.userId && (
+                  <button type="button" onClick={()=>handleDelete(ans._id, question.noOfAnswers)}>
+                    Delete
+                  </button>
+                )}
               </div>
               <div>
-                <p>answered {ans.answeredOn}</p>
+                <p>Answered {moment(ans.answeredOn).fromNow()}</p>
                 <Link
-                  to={`/User/${question.userId}`}
+                  to={`/Users/${ans.userId}`}
                   className="user-link"
                   style={{ color: "#0086d8" }}
                 >

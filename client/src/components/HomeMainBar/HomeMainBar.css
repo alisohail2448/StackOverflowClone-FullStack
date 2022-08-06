@@ -23,6 +23,7 @@
     border: none;
     text-decoration: none;
     transition: .3s;
+    cursor: pointer;
 }
 
 .main-bar-header .ask-btn:hover{

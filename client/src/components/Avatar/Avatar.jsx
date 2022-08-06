@@ -4,7 +4,6 @@ const Avatar = ({
   children,
   backgroundColor,
   px, py,
-  padding,
   color,
   borderRadius,
   fontSize,
@@ -12,7 +11,7 @@ const Avatar = ({
 }) => {
   const style = {
     backgroundColor,
-    padding: `${py} ${px}`,
+    padding: `${py}`,
     color: color || 'black',
     borderRadius,
     fontSize,
