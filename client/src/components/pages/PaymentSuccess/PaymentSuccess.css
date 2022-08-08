@@ -1,0 +1,35 @@
+.payment{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.payment h1{
+    margin-bottom: 0px;
+    font-size: 45px;
+}
+
+.payment h4{
+    color: #8b8a8a;
+}
+
+.ask{
+    margin-top: 20px;
+    padding: 15px 40px;
+    font-size: 20px;
+    border: none;
+    background-color: #e77921;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.ask:hover{
+    background-color: white;
+    color: #e77921;
+    border: 2px solid #e77921;
+}

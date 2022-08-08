@@ -40,3 +40,8 @@ export const deleteAnswers = (id, answerId, noOfAnswers) =>
 export const fetchAllUsers = () => API.get('/user/getAllUser')
 
 export const updateProfile = (id, updateData) => API.patch(`/user/update/${id}`, updateData)
+
+
+
+
+// export const Pay = (amount) => API.post("/api/pay", amount);

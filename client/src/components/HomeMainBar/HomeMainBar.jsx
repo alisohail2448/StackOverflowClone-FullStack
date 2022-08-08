@@ -69,7 +69,7 @@ const HomeMainBar = () => {
       alert("Login or signup to ask a question");
       navigate("/Auth");
     } else {
-      navigate("/AskQuestion");
+      navigate("/Price");
     }
   };
 
