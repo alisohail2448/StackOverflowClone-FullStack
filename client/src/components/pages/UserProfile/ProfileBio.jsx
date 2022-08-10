@@ -33,6 +33,18 @@ const ProfileBio = ({currentProfile}) => {
             )
         }
        </div>
+       <div>
+        {
+            currentProfile?.address ? (
+                <>
+                    <h4>Address</h4>
+                    <p>{currentProfile?.address}</p>
+                </>
+            ) : (
+                <p>No Address found</p>
+            )
+        }
+       </div>
     </div>
   )
 }

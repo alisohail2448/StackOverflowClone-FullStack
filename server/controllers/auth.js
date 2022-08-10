@@ -1,12 +1,10 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import users from "../models/authModel.js";
-import crypto from 'crypto'
-
-
+import crypto from "crypto";
 
 export const signup = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, address, city, zipcode } = req.body;
   try {
     const existinguser = await users.findOne({ email });
     if (existinguser) {
@@ -18,6 +16,7 @@ export const signup = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      address,
     });
     const token = jwt.sign(
       { email: newUser.email, id: newUser._id },
@@ -57,18 +56,16 @@ export const login = async (req, res) => {
   }
 };
 
-
-
 export const otpLogin = async (req, res) => {
   const phone = req.body.phone;
-  const otp = Math.floor(100000 + Math.random()*900000);
-  const ttl = 2*60*1000;
-  const expires = Date.now()+ttl;
+  const otp = Math.floor(100000 + Math.random() * 900000);
+  const ttl = 2 * 60 * 1000;
+  const expires = Date.now() + ttl;
   const data = `${phone}.${otp}.${expires}`;
-  const hash = crypto.createHmac('sha256', smsKey).update(data).digest('hex');
+  const hash = crypto.createHmac("sha256", smsKey).update(data).digest("hex");
   const fullHash = `${hash}.${expires}`;
 
   client.messages.create({
-    body: `Your one Time Login Password for cfm is`
-  })
+    body: `Your one Time Login Password for cfm is`,
+  });
 };

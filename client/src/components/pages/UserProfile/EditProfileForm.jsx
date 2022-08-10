@@ -4,10 +4,13 @@ import {useDispatch} from 'react-redux'
 import './UserProfile.css'
 
 const EditProfileForm = ({ currentUser, setSwitch }) => {
+    console.log(currentUser)
 
     const [name, setName] = useState(currentUser?.result?.name);
     const [about, setAbout] = useState(currentUser?.result?.about);
     const [tags, setTags] = useState('');
+    const [address, setAddress] = useState(currentUser?.result?.address);
+
 
     const dispatch = useDispatch();
 
@@ -15,10 +18,10 @@ const EditProfileForm = ({ currentUser, setSwitch }) => {
         e.preventDefault()
 
         if(tags.length === 0){
-            dispatch(updateProfile( currentUser?.result?._id, {name, about, tags: currentUser?.result?.tags}))
+            dispatch(updateProfile( currentUser?.result?._id, {name, about, tags: currentUser?.result?.tags, address}))
         }
         else{
-            dispatch(updateProfile(currentUser?.result?._id, {name, about, tags}))
+            dispatch(updateProfile(currentUser?.result?._id, {name, about, tags, address}))
         }
         setSwitch(false);
     }
@@ -40,6 +43,10 @@ const EditProfileForm = ({ currentUser, setSwitch }) => {
             <label htmlFor="about">
                 <h3>About me</h3>
                 <textarea name="" id="" cols="30" rows="10" value={about} onChange={(e) => setAbout(e.target.value)} ></textarea>
+            </label>
+            <label htmlFor="address">
+                <h3>Address</h3>
+                <textarea name="" id="" cols="30" rows="10" value={address} onChange={(e) => setAddress(e.target.value)} ></textarea>
             </label>
 
             <label htmlFor="tags">
